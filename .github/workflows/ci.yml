@@ -59,7 +59,8 @@ jobs:
           black --check .
           # Simple compilation check
           python -m py_compile main.py
-          # Run tests
+          # Run tests (with PYTHONPATH set to include current dir)
+          export PYTHONPATH=$PYTHONPATH:.
           pytest tests/
 
   extension-ci:
