@@ -20,8 +20,8 @@ AUDIO_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "audio
 RESULTS_FILE = os.path.abspath(
     os.path.join(os.path.dirname(__file__), "..", "fingerprints.json")
 )
-SERVER_URL = os.environ.get("SERVER_URL", "http://localhost:3001/webhook/upload_hashes")
-JWT_SECRET = os.environ.get("JWT_SECRET", "your_secret_key")
+SERVER_URL = os.environ.get("SERVER_URL")
+JWT_SECRET = os.environ.get("JWT_SECRET")
 
 # Fingerprinting Parameters (tuned for better recognition)
 FAN_VALUE = 20

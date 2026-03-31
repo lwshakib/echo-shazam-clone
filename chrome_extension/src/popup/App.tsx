@@ -77,7 +77,7 @@ export default function App() {
 
     setStatus('Identifying')
     try {
-      const response = await fetch('http://localhost:3001/identify', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/identify`, {
         method: 'POST',
         body: formData,
       })
