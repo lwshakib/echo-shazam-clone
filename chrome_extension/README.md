@@ -1,52 +1,45 @@
-# React + Vite + CRXJS
+# Echo Chrome Extension
 
-This template helps you quickly start developing Chrome extensions with React, TypeScript and Vite. It includes the CRXJS Vite plugin for seamless Chrome extension development.
+The **Echo Chrome Extension** is a professional-grade React application powered by **Vite** and **CRXJS**. It intercepts tab audio streams and identifies the music playing in real-time.
 
-## Features
+---
 
-- React with TypeScript
-- TypeScript support
-- Vite build tool
-- CRXJS Vite plugin integration
-- Chrome extension manifest configuration
+## 🚀 Getting Started
 
-## Quick Start
+### 1. Prerequisites
+- [Bun 1.1 or higher](https://bun.sh/)
+- [Google Chrome](https://www.google.com/chrome/)
 
-1. Install dependencies:
+### 2. Installation
+1.  Navigate to the directory: `cd chrome_extension`
+2.  Install dependencies: `bun install`
 
-```bash
-npm install
+### 3. Build & Load
+1.  Generate production bundle:
+    ```bash
+    bun run build
+    ```
+2.  Open Chrome and navigate to `chrome://extensions/`.
+3.  Enable **Developer mode** (top right).
+4.  Click **Load unpacked** and select the `/chrome_extension/dist` folder.
+
+---
+
+## 🛠️ Configuration
+
+Create a `.env` file based on `.env.example`:
+```env
+VITE_API_URL=http://localhost:3001
 ```
 
-2. Start development server:
+## 📊 Core Features
+- **🎯 Tab Capture**: High-fidelity audio interception from active tabs.
+- **⚡ Real-time Identification**: Streamlined UI for one-click identification.
+- **✨ Premium UI**: Clean, responsive design using **Lucide Icons** and **Inter** typography.
 
+## 🧪 Development
+For hot-module replacement (HMR) during extension development:
 ```bash
-npm run dev
+bun run dev
 ```
-
-3. Open Chrome and navigate to `chrome://extensions/`, enable "Developer mode", and load the unpacked extension from the `dist` directory.
-
-4. Build for production:
-
-```bash
-npm run build
-```
-
-## Project Structure
-
-- `src/popup/` - Extension popup UI
-- `src/content/` - Content scripts
-- `manifest.config.ts` - Chrome extension manifest configuration
-
-## Documentation
-
-- [React Documentation](https://reactjs.org/)
-- [Vite Documentation](https://vitejs.dev/)
-- [CRXJS Documentation](https://crxjs.dev/vite-plugin)
-
-## Chrome Extension Development Notes
-
-- Use `manifest.config.ts` to configure your extension
-- The CRXJS plugin automatically handles manifest generation
-- Content scripts should be placed in `src/content/`
-- Popup UI should be placed in `src/popup/`
+Then load the `dist` folder as per the standard instructions.
