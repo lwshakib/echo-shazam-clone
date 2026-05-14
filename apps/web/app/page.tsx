@@ -1,117 +1,220 @@
+"use client"
+
 import React from "react"
 import Logo from "@/components/Logo"
 import Link from "next/link"
+import { useTheme } from "next-themes"
+import { Icon } from "@iconify/react"
+import { Moon, Sun, ArrowRight } from "lucide-react"
 
 export default function LandingPage() {
+  const { setTheme, resolvedTheme } = useTheme()
+  const [mounted, setMounted] = React.useState(false)
+
+  // Avoid hydration mismatch
+  React.useEffect(() => setMounted(true), [])
+
   return (
-    <div className="min-h-screen bg-neutral-950 text-neutral-100 selection:bg-indigo-500/30">
-      {/* Navigation */}
-      <nav className="fixed top-0 z-50 w-full border-b border-neutral-800 bg-neutral-950/80 backdrop-blur-md">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
-          <div className="flex items-center gap-3">
-            <Logo className="h-10 w-10 text-indigo-500" />
-            <span className="bg-gradient-to-r from-white to-neutral-400 bg-clip-text text-xl font-bold tracking-tight text-transparent">
-              Echo
-            </span>
+    <div className="min-h-screen bg-white dark:bg-black text-black dark:text-white font-sans transition-colors duration-300">
+      {/* Header */}
+      <header className="fixed top-0 z-50 w-full border-b border-gray-100 dark:border-neutral-900 bg-white/80 dark:bg-black/80 backdrop-blur-md">
+        <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
+          <div className="flex items-center gap-2">
+            <Logo className="h-6 w-6" />
+            <span className="text-lg font-semibold tracking-tight">Echo</span>
           </div>
-          <div className="hidden items-center gap-8 text-sm font-medium text-neutral-400 md:flex">
-            <Link
-              href="#features"
-              className="transition-colors hover:text-white"
+          <div className="flex items-center gap-6">
+            <nav className="hidden items-center gap-6 text-sm font-medium text-gray-500 dark:text-neutral-400 md:flex">
+              <Link
+                href="#features"
+                className="hover:text-black dark:hover:text-white transition-colors"
+              >
+                Features
+              </Link>
+              <Link
+                href="#docs"
+                className="hover:text-black dark:hover:text-white transition-colors"
+              >
+                Docs
+              </Link>
+            </nav>
+            <button
+              onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-neutral-900 transition-colors"
+              aria-label="Toggle theme"
             >
-              Features
-            </Link>
-            <Link
-              href="#how-it-works"
-              className="transition-colors hover:text-white"
-            >
-              How it Works
-            </Link>
-            <Link
-              href="/dashboard"
-              className="rounded-full bg-white px-5 py-2.5 text-black transition-colors hover:bg-neutral-200"
-            >
-              Get Started
-            </Link>
+              {mounted &&
+                (resolvedTheme === "dark" ? <Sun size={18} /> : <Moon size={18} />)}
+            </button>
           </div>
         </div>
-      </nav>
+      </header>
 
       {/* Hero Section */}
-      <main className="pt-32 pb-20">
-        <section className="mx-auto max-w-7xl px-6 text-center">
-          <div className="animate-fade-in mb-8 inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-1 text-xs font-semibold text-indigo-400">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-400 opacity-75"></span>
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-indigo-500"></span>
-            </span>
-            Real-time Audio Fingerprinting
-          </div>
-          <h1 className="mb-8 text-6xl leading-[1.1] font-bold tracking-tighter md:text-8xl">
-            Identify any sound, <br />
-            <span className="text-neutral-500">instantly.</span>
-          </h1>
-          <p className="mx-auto mb-12 max-w-2xl text-lg leading-relaxed text-neutral-400 md:text-xl">
-            Echo is a professional-grade audio recognition platform. Intercept
-            audio from your browser tabs and match it against millions of
-            fingerprints with sub-second latency.
-          </p>
-          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Link
-              href="/download"
-              className="w-full rounded-2xl bg-indigo-600 px-8 py-4 font-semibold text-white shadow-lg shadow-indigo-500/20 transition-all hover:scale-105 hover:bg-indigo-500 active:scale-95 sm:w-auto"
-            >
-              Download Extension
-            </Link>
-            <Link
-              href="/docs"
-              className="w-full rounded-2xl border border-neutral-800 bg-neutral-900 px-8 py-4 font-semibold text-neutral-300 transition-all hover:bg-neutral-800 sm:w-auto"
-            >
-              Read Documentation
-            </Link>
-          </div>
+      <main className="pt-32 pb-20 px-6">
+        <div className="mx-auto max-w-3xl">
+          <section className="text-center mb-24">
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6">
+              Acoustic intelligence <br />
+              for the modern web.
+            </h1>
+            <p className="text-lg md:text-xl text-gray-500 dark:text-neutral-400 mb-10 max-w-xl mx-auto leading-relaxed">
+              Professional audio fingerprinting. Identify any sound playing in your
+              browser tabs with millisecond precision and surgical accuracy.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                href="/download"
+                className="w-full sm:w-auto px-8 py-3 bg-black dark:bg-white text-white dark:text-black font-medium rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+              >
+                Get Extension <ArrowRight size={16} />
+              </Link>
+              <Link
+                href="/docs"
+                className="w-full sm:w-auto px-8 py-3 border border-gray-200 dark:border-neutral-800 rounded-lg hover:bg-gray-50 dark:hover:bg-neutral-950 transition-colors"
+              >
+                Documentation
+              </Link>
+            </div>
+          </section>
 
-          {/* Visual Element */}
-          <div className="relative mx-auto mt-24 max-w-5xl">
-            <div className="absolute inset-0 rounded-full bg-indigo-500/20 opacity-50 blur-[120px]"></div>
-            <div className="relative aspect-video overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900/50 shadow-2xl backdrop-blur-sm">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="flex h-24 items-end gap-1">
-                  {[40, 70, 45, 90, 65, 80, 50, 95, 60, 85].map((h, i) => (
+          {/* Minimal Feature Sections */}
+          <div id="features" className="space-y-24">
+            <section className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-2xl font-bold mb-4 tracking-tight">
+                  Tab Capture Engine
+                </h2>
+                <p className="text-gray-500 dark:text-neutral-400 leading-relaxed">
+                  Direct system-level audio interception. Echo captures high-fidelity
+                  streams from active browser tabs without distortion, ensuring
+                  maximum matching probability.
+                </p>
+              </div>
+              <div className="h-40 rounded-xl bg-gray-50 dark:bg-neutral-900/50 border border-gray-100 dark:border-neutral-800 flex items-center justify-center">
+                <div className="w-full max-w-[200px] h-[2px] bg-gray-200 dark:bg-neutral-800 relative overflow-hidden">
+                  <div className="absolute top-0 left-0 h-full w-1/3 bg-black dark:bg-white animate-[scan_2s_linear_infinite]" />
+                </div>
+              </div>
+            </section>
+
+            <section className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="md:order-2">
+                <h2 className="text-2xl font-bold mb-4 tracking-tight">
+                  Spectral Fingerprinting
+                </h2>
+                <p className="text-gray-500 dark:text-neutral-400 leading-relaxed">
+                  Advanced Fourier analysis transforms audio into unique
+                  constellations of peaks. Our algorithm is resistant to background
+                  noise, low-quality speakers, and heavy compression.
+                </p>
+              </div>
+              <div className="md:order-1 h-40 rounded-xl bg-gray-50 dark:bg-neutral-900/50 border border-gray-100 dark:border-neutral-800 flex items-center justify-center">
+                <div className="flex gap-1 items-end h-12">
+                  {[3, 7, 5, 9, 4, 8, 6, 10].map((h, i) => (
                     <div
                       key={i}
-                      className="w-3 animate-pulse rounded-full bg-indigo-500/40"
-                      style={{ height: `${h}%`, animationDelay: `${i * 0.1}s` }}
+                      className="w-2 bg-gray-300 dark:bg-neutral-700 rounded-sm"
+                      style={{ height: `${h * 10}%` }}
                     />
                   ))}
                 </div>
               </div>
-            </div>
+            </section>
           </div>
-        </section>
+        </div>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-neutral-900 bg-neutral-950 py-12">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-8 px-6 md:flex-row">
-          <div className="flex items-center gap-3 opacity-50">
-            <Logo className="h-6 w-6" />
-            <span className="font-bold">Echo</span>
+      {/* Detailed Footer */}
+      <footer className="border-t border-gray-100 dark:border-neutral-900 pt-16 pb-8 px-6">
+        <div className="mx-auto max-w-5xl">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mb-16">
+            <div className="col-span-2">
+              <div className="flex items-center gap-2 mb-6">
+                <Logo className="h-5 w-5" />
+                <span className="font-bold tracking-tight">Echo</span>
+              </div>
+              <p className="text-sm text-gray-500 dark:text-neutral-400 max-w-xs leading-relaxed">
+                The open-source standard for audio identification. Built with
+                precision and privacy in mind.
+              </p>
+            </div>
+            <div>
+              <h4 className="text-sm font-bold mb-6">Product</h4>
+              <ul className="space-y-4 text-sm text-gray-500 dark:text-neutral-400">
+                <li>
+                  <Link href="#" className="hover:text-black dark:hover:text-white">
+                    Extension
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#" className="hover:text-black dark:hover:text-white">
+                    Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#" className="hover:text-black dark:hover:text-white">
+                    API Docs
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-sm font-bold mb-6">Connect</h4>
+              <ul className="space-y-4 text-sm text-gray-500 dark:text-neutral-400">
+                <li>
+                  <Link
+                    href="#"
+                    className="flex items-center gap-2 hover:text-black dark:hover:text-white"
+                  >
+                    <Icon icon="mdi:github" className="w-4 h-4" /> GitHub
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="flex items-center gap-2 hover:text-black dark:hover:text-white"
+                  >
+                    <Icon icon="mdi:twitter" className="w-4 h-4" /> Twitter
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="flex items-center gap-2 hover:text-black dark:hover:text-white"
+                  >
+                    <Icon icon="mdi:email" className="w-4 h-4" /> Contact
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
-          <p className="text-sm text-neutral-500">
-            © 2026 Echo Identification System. Built for professional acoustic
-            fingerprinting.
-          </p>
-          <div className="flex gap-6 text-neutral-500">
-            <Link href="#" className="transition-colors hover:text-white">
-              GitHub
-            </Link>
-            <Link href="#" className="transition-colors hover:text-white">
-              Terms
-            </Link>
+          <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-100 dark:border-neutral-900 gap-4">
+            <p className="text-xs text-gray-400 dark:text-neutral-500">
+              © 2026 Echo Identification System. All rights reserved.
+            </p>
+            <div className="flex gap-6 text-xs text-gray-400 dark:text-neutral-500">
+              <Link href="#" className="hover:text-black dark:hover:text-white">
+                Privacy Policy
+              </Link>
+              <Link href="#" className="hover:text-black dark:hover:text-white">
+                Terms of Service
+              </Link>
+            </div>
           </div>
         </div>
       </footer>
+
+      <style jsx global>{`
+        @keyframes scan {
+          0% {
+            transform: translateX(-100%);
+          }
+          100% {
+            transform: translateX(300%);
+          }
+        }
+      `}</style>
     </div>
   )
 }
