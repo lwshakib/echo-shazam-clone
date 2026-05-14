@@ -7,14 +7,17 @@ The **Echo Chrome Extension** is a professional-grade React application powered 
 ## 🚀 Getting Started
 
 ### 1. Prerequisites
+
 - [Node.js/pnpm 20/9 or higher](https://pnpm.io/)
 - [Google Chrome](https://www.google.com/chrome/)
 
 ### 2. Installation
+
 1.  Navigate to the directory: `cd apps/chrome-extension`
 2.  Install dependencies: `pnpm install`
 
 ### 3. Build & Load
+
 1.  Generate production bundle:
     ```bash
     pnpm run build
@@ -28,18 +31,23 @@ The **Echo Chrome Extension** is a professional-grade React application powered 
 ## 🛠️ Configuration
 
 Create a `.env` file based on `.env.example`:
+
 ```env
 VITE_API_URL=http://localhost:4000
 ```
 
 ## 📊 Core Features
+
 - **🎯 Tab Capture**: High-fidelity audio interception from active tabs.
 - **⚡ Real-time Identification**: Streamlined UI for one-click identification.
 - **✨ Premium UI**: Clean, responsive design using **Lucide Icons** and **Inter** typography.
 
 ## 🧪 Development
+
 For hot-module replacement (HMR) during extension development:
+
 ```bash
 pnpm run dev
 ```
+
 Then load the `dist` folder as per the standard instructions.

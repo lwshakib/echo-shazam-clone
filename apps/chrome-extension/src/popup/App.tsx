@@ -82,8 +82,10 @@ export default function App() {
         body: formData,
       })
 
-      const data = await response.json()
-      if (data.match) {
+      const responseData = await response.json()
+      const { data } = responseData
+
+      if (data && data.match) {
         setMatch(data.song)
         stopIdentification(true)
       } else {
