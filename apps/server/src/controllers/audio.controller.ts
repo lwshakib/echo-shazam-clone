@@ -1,7 +1,10 @@
 import type { Request, Response } from 'express';
 import { pool } from '../lib/db.js';
-
-const WORKER_API_URL = process.env.WORKER_API_URL || 'http://localhost:8000/identify';
+import { WORKER_API_URL } from '../envs.js';
+import { asyncHandler } from '../utils/asyncHandler.js';
+import { ApiError } from '../utils/ApiError.js';
+import { ApiResponse } from '../utils/ApiResponse.js';
+import logger from '../logger/winston.logger.js';
 
 /**
  * Identify Audio Chunk via FastAPI and PostgreSQL
@@ -9,7 +12,7 @@ const WORKER_API_URL = process.env.WORKER_API_URL || 'http://localhost:8000/iden
  */
 async function identifyAudio(fileBuffer: Buffer, fileName: string): Promise<string | null> {
   try {
-    console.log(`Sending buffer to FastAPI for identification: ${fileName}`);
+    logger.info(`Sending buffer to FastAPI for identification: ${fileName}`);
 
     const formData = new FormData();
     const blob = new Blob([new Uint8Array(fileBuffer)], { type: 'audio/webm' });
@@ -21,7 +24,7 @@ async function identifyAudio(fileBuffer: Buffer, fileName: string): Promise<stri
     });
 
     if (!response.ok) {
-      console.error(`FastAPI identification error: ${response.statusText}`);
+      logger.error(`FastAPI identification error: ${response.statusText}`);
       return null;
     }
 
@@ -55,35 +58,34 @@ async function identifyAudio(fileBuffer: Buffer, fileName: string): Promise<stri
 
     const threshold = 15;
     if (dbRes.rows.length > 0 && dbRes.rows[0].hits >= threshold) {
-      console.log(
+      logger.info(
         `Match success: ${dbRes.rows[0].song_name} with ${dbRes.rows[0].hits} aligned hits.`,
       );
       return dbRes.rows[0].song_name;
     } else {
       if (dbRes.rows.length > 0) {
-        console.log(
+        logger.warn(
           `Low confidence match: ${dbRes.rows[0].song_name} had ${dbRes.rows[0].hits} hits (Threshold: ${threshold})`,
         );
       }
       return null;
     }
   } catch (err) {
-    console.error('Identification failed:', err);
-    return null;
+    logger.error('Identification failed:', err);
+    throw new ApiError(500, 'Audio identification internal error');
   }
 }
 
-export const identifyAudioHandler = async (req: Request, res: Response) => {
+export const identifyAudioHandler = asyncHandler(async (req: Request, res: Response) => {
   if (!req.file) {
-    res.status(400).send('No audio file provided.');
-    return;
+    throw new ApiError(400, 'No audio file provided.');
   }
 
   const result = await identifyAudio(req.file.buffer, req.file.originalname);
 
   if (result) {
-    res.json({ match: true, song: result });
+    return res.status(200).json(new ApiResponse(200, { match: true, song: result }, 'Match found'));
   } else {
-    res.json({ match: false });
+    return res.status(200).json(new ApiResponse(200, { match: false }, 'No match found'));
   }
-};
+});

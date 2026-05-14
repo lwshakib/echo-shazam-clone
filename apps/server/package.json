@@ -13,13 +13,16 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
+    "@types/morgan": "^1.9.10",
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
     "lodash": "^4.17.23",
+    "morgan": "^1.10.1",
     "multer": "^2.1.1",
-    "pg": "^8.20.0"
+    "pg": "^8.20.0",
+    "winston": "^3.19.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
@@ -30,6 +33,7 @@
     "@types/node": "^22.0.0",
     "@types/pg": "^8.18.0",
     "prettier": "^3.8.1",
+    "tsc-watch": "^6.0.4",
     "tsx": "^4.19.2",
     "typescript": "^5.9.3"
   }

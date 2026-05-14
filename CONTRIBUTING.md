@@ -6,30 +6,30 @@ Welcome to the **Echo** development community! We're excited that you're interes
 
 ## 📁 Project Structure
 
--   **`server/`**: Node.js (Node.js/pnpm) server that manages the database, identification logic, and extension API.
--   **`fingerprint-generator/`**: Python FastAPI service for spectral peak detection and hashing (FFT processing).
--   **`chrome_extension/`**: React (Vite) frontend with TabCapture permissions.
+-   **`apps/server/`**: Node.js (Node.js/pnpm) server that manages the database, identification logic, and extension API.
+-   **`apps/fingerprint-worker/`**: Python FastAPI service for spectral peak detection and hashing (FFT processing).
+-   **`apps/chrome-extension/`**: React (Vite) frontend with TabCapture permissions.
 -   **`audios/`**: Local directory for indexing your music library.
 
 ## 🚀 Setting Up for Development
 
 Each component has a detailed setup guide. Below is a quick overview:
 
-### 1. The Python Worker (`/fingerprint-generator`)
+### 1. The Python Worker (`/apps/fingerprint-worker`)
 -   Create a virtual environment: `python -m venv .venv`
 -   Activate environment: `.\.venv\Scripts\activate` (Windows) or `source .venv/bin/activate` (Unix).
 -   Install dependencies: `pip install -r requirements.txt`.
 -   Verify with `python main.py`.
 
-### 2. The Node.js/pnpm Server (`/server`)
+### 2. The Node.js/pnpm Server (`/apps/server`)
 -   Install dependencies: `pnpm install`.
 -   Run `pnpm run dev`.
 -   **Important**: The server automatically initializes the schema from `schema.sql` on startup.
 
-### 3. The Chrome Extension (`/chrome_extension`)
+### 3. The Chrome Extension (`/apps/chrome-extension`)
 -   Install dependencies: `pnpm install`.
 -   Run `pnpm run build`.
--   Load `chrome_extension/dist` as an unpacked extension.
+-   Load `apps/chrome-extension/dist` as an unpacked extension.
 
 ---
 

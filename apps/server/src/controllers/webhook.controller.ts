@@ -1,14 +1,17 @@
 import type { Request, Response } from 'express';
 import { pool } from '../lib/db.js';
+import { asyncHandler } from '../utils/asyncHandler.js';
+import { ApiError } from '../utils/ApiError.js';
+import { ApiResponse } from '../utils/ApiResponse.js';
+import logger from '../logger/winston.logger.js';
 
-export const uploadHashesHandler = async (req: Request, res: Response) => {
+export const uploadHashesHandler = asyncHandler(async (req: Request, res: Response) => {
   const { song, hashes } = req.body;
   if (!song || !hashes || !Array.isArray(hashes)) {
-    res.status(400).send({ error: 'Invalid request body.' });
-    return;
+    throw new ApiError(400, 'Invalid request body. Expected song and hashes array.');
   }
 
-  console.log(`Receiving data for ${song} (${hashes.length} hashes)...`);
+  logger.info(`Receiving data for ${song} (${hashes.length} hashes)...`);
 
   const client = await pool.connect();
   try {
@@ -47,12 +50,12 @@ export const uploadHashesHandler = async (req: Request, res: Response) => {
     }
 
     await client.query('COMMIT');
-    res.json({ success: true, count: hashes.length });
+    return res.status(200).json(new ApiResponse(200, { count: hashes.length }, 'Hashes synchronized successfully'));
   } catch (err) {
     await client.query('ROLLBACK');
-    console.error('Failed to sync hashes:', err);
-    res.status(500).send({ error: 'Database sync error.' });
+    logger.error('Failed to sync hashes:', err);
+    throw new ApiError(500, 'Database synchronization error');
   } finally {
     client.release();
   }
-};
+});

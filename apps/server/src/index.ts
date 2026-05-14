@@ -1,27 +1,25 @@
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import audioRoutes from './routes/audio.routes.js';
-import webhookRoutes from './routes/webhook.routes.js';
-import { initDb } from './lib/db.js';
+import app from "./app.js"
+import { initDb } from "./lib/db.js"
+import { PORT } from "./envs.js"
+import logger from "./logger/winston.logger.js"
 
-dotenv.config();
+/**
+ * Start the Express server and initialize dependencies.
+ */
+async function startServer() {
+  try {
+    // 1. Initialize the database schema
+    await initDb()
 
-const app = express();
-const port = Number(process.env.PORT) || 3001;
+    // 2. Start listening for requests
+    app.listen(PORT, () => {
+      logger.info(`🚀 Echo Server running at http://localhost:${PORT}`)
+    })
+  } catch (error) {
+    logger.error("Failed to start server:", error)
+    process.exit(1)
+  }
+}
 
-app.use(cors());
-app.use(express.json({ limit: '50mb' }));
-
-// Mount routes
-app.use('/identify', audioRoutes);
-app.use('/webhook', webhookRoutes);
-
-// Initialize DB schema and start server
-initDb().then(() => {
-  app.listen(port, () => {
-    console.log(`Echo Server running at http://localhost:${port}`);
-  });
-});
-
-export default app;
+// Bootstrap the application
+startServer()

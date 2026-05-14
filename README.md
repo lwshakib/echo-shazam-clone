@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="chrome_extension/public/logo.svg" width="120" alt="Echo Logo" />
+  <img src="apps/chrome-extension/public/logo.svg" width="120" alt="Echo Logo" />
   <h1>Echo: High-Resolution Audio Recognition</h1>
   <p><i>A professional, distributed system for real-time acoustic fingerprinting and identification.</i></p>
 
@@ -68,9 +68,9 @@ Each component contains its own detailed implementation and setup instructions:
 
 | Component | Technology | Description |
 | :--- | :--- | :--- |
-| [**/server**](server/README.md) | Node.js/pnpm, Express, PostgreSQL | Central orchestrator and metadata synchronization. |
-| [**/fingerprint-generator**](fingerprint-generator/README.md) | Python, FastAPI, librosa | Specialized worker for spectral hashing (FFT). |
-| [**/chrome_extension**](chrome_extension/README.md) | React, Vite, CRXJS | High-fidelity audio interception and identification UI. |
+| [**/apps/server**](apps/server/README.md) | Node.js/pnpm, Express, PostgreSQL | Central orchestrator and metadata synchronization. |
+| [**/apps/fingerprint-worker**](apps/fingerprint-worker/README.md) | Python, FastAPI, librosa | Specialized worker for spectral hashing (FFT). |
+| [**/apps/chrome-extension**](apps/chrome-extension/README.md) | React, Vite, CRXJS | High-fidelity audio interception and identification UI. |
 
 ---
 

@@ -7,21 +7,21 @@ The **Echo Chrome Extension** is a professional-grade React application powered 
 ## 🚀 Getting Started
 
 ### 1. Prerequisites
-- [Node.js/pnpm 1.1 or higher](https://Node.js/pnpm.sh/)
+- [Node.js/pnpm 20/9 or higher](https://pnpm.io/)
 - [Google Chrome](https://www.google.com/chrome/)
 
 ### 2. Installation
-1.  Navigate to the directory: `cd chrome_extension`
+1.  Navigate to the directory: `cd apps/chrome-extension`
 2.  Install dependencies: `pnpm install`
 
 ### 3. Build & Load
-1.  Generate production Node.js/pnpmdle:
+1.  Generate production bundle:
     ```bash
     pnpm run build
     ```
 2.  Open Chrome and navigate to `chrome://extensions/`.
 3.  Enable **Developer mode** (top right).
-4.  Click **Load unpacked** and select the `/chrome_extension/dist` folder.
+4.  Click **Load unpacked** and select the `apps/chrome-extension/dist` folder.
 
 ---
 
@@ -29,7 +29,7 @@ The **Echo Chrome Extension** is a professional-grade React application powered 
 
 Create a `.env` file based on `.env.example`:
 ```env
-VITE_API_URL=http://localhost:3001
+VITE_API_URL=http://localhost:4000
 ```
 
 ## 📊 Core Features

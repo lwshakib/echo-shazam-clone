@@ -16,9 +16,11 @@ import tempfile
 load_dotenv()
 
 # Parameters from .env or defaults
-AUDIO_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "audios"))
-RESULTS_FILE = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "..", "fingerprints.json")
+AUDIO_DIR = os.environ.get("AUDIO_DIR") or os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "..", "..", "audios")
+)
+RESULTS_FILE = os.environ.get("RESULTS_FILE") or os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "..", "..", "fingerprints.json")
 )
 SERVER_URL = os.environ.get("SERVER_URL")
 JWT_SECRET = os.environ.get("JWT_SECRET")

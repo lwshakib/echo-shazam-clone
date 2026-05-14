@@ -1,13 +1,10 @@
 import { Pool } from 'pg';
 import fs from 'fs';
 import path from 'path';
-import dotenv from 'dotenv';
-
-dotenv.config();
+import { DATABASE_URL } from '../envs.js';
 
 export const pool = new Pool({
-  connectionString:
-    process.env.DATABASE_URL || 'postgresql://postgres:password@localhost:5432/echo_shazam',
+  connectionString: DATABASE_URL,
 });
 
 // Initialize DB schema
