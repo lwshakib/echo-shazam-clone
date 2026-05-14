@@ -26,16 +26,11 @@ export default function LandingPage() {
           <div className="flex items-center gap-6">
             <nav className="hidden items-center gap-6 text-sm font-medium text-gray-500 dark:text-neutral-400 md:flex">
               <Link
-                href="#features"
-                className="hover:text-black dark:hover:text-white transition-colors"
+                href="https://github.com/lwshakib/echo-shazam-clone"
+                className="flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
+                target="_blank"
               >
-                Features
-              </Link>
-              <Link
-                href="#docs"
-                className="hover:text-black dark:hover:text-white transition-colors"
-              >
-                Docs
+                <Icon icon="mdi:github" className="w-4 h-4" /> Open Source
               </Link>
             </nav>
             <button
@@ -54,6 +49,10 @@ export default function LandingPage() {
       <main className="pt-32 pb-20 px-6">
         <div className="mx-auto max-w-3xl">
           <section className="text-center mb-24">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 dark:bg-neutral-900 text-[10px] font-bold uppercase tracking-widest mb-8 border border-gray-200 dark:border-neutral-800">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+              In Development
+            </div>
             <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6">
               Acoustic intelligence <br />
               for the modern web.
@@ -64,13 +63,15 @@ export default function LandingPage() {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
-                href="/download"
+                href="https://github.com/lwshakib/echo-shazam-clone"
+                target="_blank"
                 className="w-full sm:w-auto px-8 py-3 bg-black dark:bg-white text-white dark:text-black font-medium rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
               >
                 Get Extension <ArrowRight size={16} />
               </Link>
               <Link
-                href="/docs"
+                href="https://github.com/lwshakib/echo-shazam-clone"
+                target="_blank"
                 className="w-full sm:w-auto px-8 py-3 border border-gray-200 dark:border-neutral-800 rounded-lg hover:bg-gray-50 dark:hover:bg-neutral-950 transition-colors"
               >
                 Documentation
