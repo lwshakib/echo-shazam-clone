@@ -142,4 +142,13 @@
   ::-webkit-scrollbar-thumb:hover {
     background: oklch(0.5 0 0 / 40%);
   }
+
+  @keyframes scan {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(300%);
+    }
+  }
 }
