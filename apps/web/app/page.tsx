@@ -80,45 +80,82 @@ export default function LandingPage() {
           </section>
 
           {/* Minimal Feature Sections */}
-          <div id="features" className="space-y-24">
-            <section className="grid md:grid-cols-2 gap-12 items-center">
+          <div id="features" className="space-y-32">
+            <section className="grid md:grid-cols-2 gap-16 items-center">
               <div>
-                <h2 className="text-2xl font-bold mb-4 tracking-tight">
-                  Tab Capture Engine
+                <h2 className="text-3xl font-bold mb-6 tracking-tight">
+                  High-Fidelity Tab Capture
                 </h2>
-                <p className="text-gray-500 dark:text-neutral-400 leading-relaxed">
-                  Direct system-level audio interception. Echo captures high-fidelity
-                  streams from active browser tabs without distortion, ensuring
-                  maximum matching probability.
+                <p className="text-gray-500 dark:text-neutral-400 leading-relaxed text-lg">
+                  Echo intercepts raw PCM audio directly from your active browser tabs.
+                  Unlike other tools, we bypass the system mixer to ensure zero
+                  distortion, providing the cleanest possible signal for our
+                  fingerprinting engine.
                 </p>
               </div>
-              <div className="h-40 rounded-xl bg-gray-50 dark:bg-neutral-900/50 border border-gray-100 dark:border-neutral-800 flex items-center justify-center">
-                <div className="w-full max-w-[200px] h-[2px] bg-gray-200 dark:bg-neutral-800 relative overflow-hidden">
-                  <div className="absolute top-0 left-0 h-full w-1/3 bg-black dark:bg-white animate-[scan_2s_linear_infinite]" />
+              <div className="h-56 rounded-2xl bg-gray-50 dark:bg-neutral-900/50 border border-gray-100 dark:border-neutral-800 flex items-center justify-center relative overflow-hidden group">
+                <div className="w-full max-w-[240px] h-[2px] bg-gray-200 dark:bg-neutral-800 relative overflow-hidden">
+                  <div className="absolute top-0 left-0 h-full w-1/4 bg-black dark:bg-white animate-[scan_1.5s_linear_infinite]" />
+                </div>
+                <div className="absolute bottom-4 right-4 text-[10px] text-gray-400 font-mono uppercase tracking-tighter">
+                  Real-time Stream Intercept
                 </div>
               </div>
             </section>
 
-            <section className="grid md:grid-cols-2 gap-12 items-center">
+            <section className="grid md:grid-cols-2 gap-16 items-center">
               <div className="md:order-2">
-                <h2 className="text-2xl font-bold mb-4 tracking-tight">
-                  Spectral Fingerprinting
+                <h2 className="text-3xl font-bold mb-6 tracking-tight">
+                  Spectral Constellation Mapping
                 </h2>
-                <p className="text-gray-500 dark:text-neutral-400 leading-relaxed">
-                  Advanced Fourier analysis transforms audio into unique
-                  constellations of peaks. Our algorithm is resistant to background
-                  noise, low-quality speakers, and heavy compression.
+                <p className="text-gray-500 dark:text-neutral-400 leading-relaxed text-lg">
+                  Using Fast Fourier Transforms (FFT), we convert audio into a 2D
+                  spectrogram. We extract the strongest "landmarks" to create a
+                  spectral constellation map that remains unique even in noisy
+                  environments or heavy MP3 compression.
                 </p>
               </div>
-              <div className="md:order-1 h-40 rounded-xl bg-gray-50 dark:bg-neutral-900/50 border border-gray-100 dark:border-neutral-800 flex items-center justify-center">
-                <div className="flex gap-1 items-end h-12">
-                  {[3, 7, 5, 9, 4, 8, 6, 10].map((h, i) => (
+              <div className="md:order-1 h-56 rounded-2xl bg-gray-50 dark:bg-neutral-900/50 border border-gray-100 dark:border-neutral-800 flex items-center justify-center group overflow-hidden">
+                <div className="flex gap-2 items-end h-24">
+                  {[3, 8, 5, 10, 4, 9, 6, 12].map((h, i) => (
                     <div
                       key={i}
-                      className="w-2 bg-gray-300 dark:bg-neutral-700 rounded-sm"
-                      style={{ height: `${h * 10}%` }}
+                      className="w-3 bg-gray-300 dark:bg-neutral-700 rounded-sm transition-all duration-500 group-hover:bg-black dark:group-hover:bg-white"
+                      style={{ height: `${h * 8}%` }}
                     />
                   ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="grid md:grid-cols-2 gap-16 items-center">
+              <div>
+                <h2 className="text-3xl font-bold mb-6 tracking-tight">
+                  Distributed Architecture
+                </h2>
+                <p className="text-gray-500 dark:text-neutral-400 leading-relaxed text-lg">
+                  Echo is built on a professional-grade monorepo. A high-concurrency
+                  Node.js orchestrator manages the database and extension API, while
+                  a specialized Python FastAPI worker handles heavy-duty signal
+                  processing using NumPy and SciPy.
+                </p>
+              </div>
+              <div className="h-56 rounded-2xl bg-gray-50 dark:bg-neutral-900/50 border border-gray-100 dark:border-neutral-800 p-8 flex flex-col justify-center gap-4 font-mono text-[11px]">
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 rounded-full bg-green-500" />
+                  <span className="text-gray-400">apps/server: pnpm + express</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 rounded-full bg-blue-500" />
+                  <span className="text-gray-400">
+                    apps/fingerprint-worker: python + fastapi
+                  </span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 rounded-full bg-amber-500" />
+                  <span className="text-gray-400">
+                    apps/chrome-extension: vite + react
+                  </span>
                 </div>
               </div>
             </section>
