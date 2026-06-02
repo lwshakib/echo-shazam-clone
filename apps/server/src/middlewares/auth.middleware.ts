@@ -15,7 +15,8 @@ export const authenticate = (
   }
 
   try {
-    jwt.verify(token, JWT_SECRET)
+    const decoded = jwt.verify(token, JWT_SECRET)
+    ;(req as any).user = decoded
     next()
   } catch (err) {
     res.status(403).send("Invalid token.")
