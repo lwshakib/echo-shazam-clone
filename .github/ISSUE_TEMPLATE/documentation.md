@@ -3,11 +3,11 @@ name: Documentation
 about: Documentation fix or improvement
 title: "[DOCS] "
 labels: documentation
-assignees: ''
-
+assignees: ""
 ---
 
 **Is there a specific folder where documentation needs to be added/corrected?**
+
 - [ ] Root README
 - [ ] /server (Node)
 - [ ] /fingerprint-generator (Python)

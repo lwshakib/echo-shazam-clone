@@ -3,8 +3,7 @@ name: Feature Request
 about: Suggest an idea or enhancement for Echo
 title: "[FEATURE] "
 labels: enhancement
-assignees: ''
-
+assignees: ""
 ---
 
 **Is your feature request related to a problem? Please describe.**
@@ -18,6 +17,7 @@ A clear and concise description of any alternative solutions or features you've 
 
 **Technical Area**
 Which part of the system would this feature affect?
+
 - [ ] Chrome Extension (UI/Capture)
 - [ ] Node.js Server (Database/API)
 - [ ] Python Worker (Signal Processing/FFT)

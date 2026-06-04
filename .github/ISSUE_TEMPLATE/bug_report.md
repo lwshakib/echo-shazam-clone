@@ -3,14 +3,14 @@ name: Bug Report
 about: Create a report to help us improve the Echo recognition engine
 title: "[BUG] "
 labels: bug
-assignees: ''
-
+assignees: ""
 ---
 
 **Describe the bug**
 A clear and concise description of what the bug is.
 
 **Service where the bug occurred**
+
 - [ ] Chrome Extension (UI/Capture)
 - [ ] Node.js Server (Database/API)
 - [ ] Python Worker (Signal Processing/FFT)
@@ -18,6 +18,7 @@ A clear and concise description of what the bug is.
 
 **Steps to Reproduce**
 Steps to reproduce the behavior:
+
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
@@ -30,6 +31,7 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem. If it's an identification issue, please provide the name of the song or an audio snippet.
 
 **Environment (please complete the following information):**
+
 - OS: [e.g. Windows 11]
 - Browser: [e.g. Chrome 120]
 - Node Version: [e.g. 20.x or Bun]

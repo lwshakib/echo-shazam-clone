@@ -3,10 +3,11 @@
   <h1>Echo: High-Resolution Audio Recognition</h1>
   <p><i>A professional, distributed system for real-time acoustic fingerprinting and identification.</i></p>
 
-  [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-  [![Stack: pnpm](https://img.shields.io/badge/Package_Manager-pnpm-orange)](https://pnpm.io/)
-  [![Stack: FastAPI](https://img.shields.io/badge/Worker-FastAPI-009688)](https://fastapi.tiangolo.com/)
-  [![Stack: React](https://img.shields.io/badge/Extension-React-61DAFB)](https://reactjs.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Stack: pnpm](https://img.shields.io/badge/Package_Manager-pnpm-orange)](https://pnpm.io/)
+[![Stack: FastAPI](https://img.shields.io/badge/Worker-FastAPI-009688)](https://fastapi.tiangolo.com/)
+[![Stack: React](https://img.shields.io/badge/Extension-React-61DAFB)](https://reactjs.org/)
+
 </div>
 
 ---
@@ -15,12 +16,12 @@
 
 ## 🚀 Key Features
 
--   **🎯 Real-time Tab Capture**: Directly intercept audio from any Chrome tab using high-fidelity capture APIs.
--   **🌌 Acoustic Fingerprinting**: Converts audio into a spectral "peak constellation" map, highly resistant to noise and compression.
--   **🏗️ Production-Grade Architecture**:
-    -   **Distributed Processing**: Node.js server handles orchestration/DB, while a specialized Python FastAPI worker manages heavy signal processing.
-    -   **Vectorized Math**: Uses NumPy and SciPy for high-speed FFT (Fast Fourier Transform) and peak detection.
-    -   **Secure Synchronization**: Sync large fingerprint datasets from the generator to the database using JWT-authenticated webhooks.
+- **🎯 Real-time Tab Capture**: Directly intercept audio from any Chrome tab using high-fidelity capture APIs.
+- **🌌 Acoustic Fingerprinting**: Converts audio into a spectral "peak constellation" map, highly resistant to noise and compression.
+- **🏗️ Production-Grade Architecture**:
+  - **Distributed Processing**: Node.js server handles orchestration/DB, while a specialized Python FastAPI worker manages heavy signal processing.
+  - **Vectorized Math**: Uses NumPy and SciPy for high-speed FFT (Fast Fourier Transform) and peak detection.
+  - **Secure Synchronization**: Sync large fingerprint datasets from the generator to the database using JWT-authenticated webhooks.
 
 ## 🏗️ System Architecture
 
@@ -29,16 +30,16 @@ graph TD
     subgraph Browser
         A[Chrome Extension]
     end
-    
+
     subgraph Backend Services
         B[Node.js Orchestrator]
         C[Python FastAPI Worker]
     end
-    
+
     subgraph Data Layer
         D[(PostgreSQL)]
     end
-    
+
     A -->|Audio Chunks| B
     B -->|Binary Buffer| C
     C -->|Spectral Hashes| B
@@ -52,6 +53,7 @@ graph TD
 To quickly spin up the environment with Docker:
 
 1.  **Clone the Repository**:
+
     ```bash
     git clone https://github.com/lwshakib/echo-shazam-clone.git
     cd echo-shazam-clone
@@ -66,33 +68,40 @@ To quickly spin up the environment with Docker:
 
 Each component contains its own detailed implementation and setup instructions:
 
-| Component | Technology | Description |
-| :--- | :--- | :--- |
-| [**/apps/server**](apps/server/README.md) | Node.js/pnpm, Express, PostgreSQL | Central orchestrator and metadata synchronization. |
-| [**/apps/fingerprint-worker**](apps/fingerprint-worker/README.md) | Python, FastAPI, librosa | Specialized worker for spectral hashing (FFT). |
-| [**/apps/chrome-extension**](apps/chrome-extension/README.md) | React, Vite, CRXJS | High-fidelity audio interception and identification UI. |
+| Component                                                         | Technology                        | Description                                             |
+| :---------------------------------------------------------------- | :-------------------------------- | :------------------------------------------------------ |
+| [**/apps/server**](apps/server/README.md)                         | Node.js/pnpm, Express, PostgreSQL | Central orchestrator and metadata synchronization.      |
+| [**/apps/fingerprint-worker**](apps/fingerprint-worker/README.md) | Python, FastAPI, librosa          | Specialized worker for spectral hashing (FFT).          |
+| [**/apps/chrome-extension**](apps/chrome-extension/README.md)     | React, Vite, CRXJS                | High-fidelity audio interception and identification UI. |
 
 ---
 
 ## 🧪 Quick Start Guide
 
 ### 1. Database Initialization
+
 Ensure Docker is running and the database service is up:
+
 ```bash
 docker-compose up -d
 ```
 
 ### 2. Install Dependencies
+
 Install all workspace dependencies from the root directory:
+
 ```bash
 pnpm install
 ```
 
 ### 3. Configure Environment `.env`
+
 Each service requires a `.env` file based on its `.env.example`. Refer to the component-level READMEs for specific variable documentation.
 
 ### 4. Populating the Library
+
 Place audit tracks (`.mp3`, `.wav`) in the `/audios` directory and run the indexing batch mode:
+
 ```bash
 cd apps/fingerprint-worker
 .\.venv\Scripts\activate
@@ -100,12 +109,15 @@ python main.py --batch
 ```
 
 ### 5. Identification Workflow
+
 1.  Initialize the **Orchestrator** (`cd apps/server && pnpm run dev`).
 2.  Initialize the **Worker** (`cd apps/fingerprint-worker && python main.py`).
 3.  Load the **Chrome Extension** in your browser (`pnpm run build` in `apps/chrome-extension`) and click **Identify**.
 
 ## 🤝 Contributing
+
 Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our workflow and coding standards.
 
 ## 📄 License
+
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

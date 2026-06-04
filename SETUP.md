@@ -43,6 +43,7 @@ pnpm run dev
 To process all audio files in your `audios/` directory and save their spectral fingerprints to the database, run the `fingerprint-worker` in batch mode.
 
 1. Navigate to the worker directory and activate the virtual environment:
+
    ```bash
    cd apps/fingerprint-worker
    .\.venv\Scripts\activate  # On Windows
